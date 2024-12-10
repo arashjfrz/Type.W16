@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
+import { SignUpForm } from './signup';
 
 
 export const LoginApp: React.FC = () => {
@@ -12,22 +13,22 @@ export const LoginApp: React.FC = () => {
   const isPasswordValid = password.trim() !== '';
   const isNextDisabled = (page === 1 && !isEmailValid) || (page === 2 && !isPasswordValid);
 
-  const nextPage = () => {  
-    if (page < 2) setPage(page + 1);  
-  };  
+  const nextPage = () => {
+    if (page < 2) setPage(page + 1);
+  };
 
 
-  useEffect(() => {  
-    const storedEmail = localStorage.getItem('userEmail');  
-    const storedPassword = localStorage.getItem('userPassword');  
-    
-    if (storedEmail) {  
-      setEmail(storedEmail);  
-    }  
-    if (storedPassword) {  
-      setPassword(storedPassword);  
-    }  
-  }, []);  
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
+
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+    if (storedPassword) {
+      setPassword(storedPassword);
+    }
+  }, []);
 
 
   return (
@@ -61,15 +62,21 @@ export const LoginApp: React.FC = () => {
           <button onClick={nextPage} className="mt-6 p-2 w-48 bg-zinc-700 text-white rounded-full" disabled={isNextDisabled}>
             Next
           </button>
+          <button onClick={() => setPage(2)} className="mt-6 p-2 w-48 bg-zinc-700 text-white rounded-full">  
+            Sign Up  
+          </button>  
         </div>
       )}
+        {page === 2 && (  
+        <SignUpForm />  
+      )}  
 
-      {page === 3 && (
-        <div className="flex flex-col items-center">
-          <h1 className="text-2xl mt-4">Login to Your Account</h1>
-          <div className="mt-4">
-            <p>Your deta is saved successfuly</p>
-          </div>
+    {page === 3 && (
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl mt-4">Login to Your Account</h1>
+        <div className="mt-4">
+          <p>Your deta is saved successfuly</p>
+        </div>
 
         </div>
       )}
